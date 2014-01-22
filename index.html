@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -416,7 +417,7 @@ $(document).ready(function() {
 	var agents = {'OutCast3k':{
 		'email':'OutCast3k@gmail.com',
 		'url':'https://bitcointalk.org/index.php?action=profile;u=34834',
-		'address':'15xK8XyfTjXYVKkB42TDjP7A7FtyfNZqRP',
+		'address':'1GzgtxGhpgiKQjXMoh39yMqQmBBnjtwmR',
 		'pubkey':'04b6231cc602740c29436eafbb6448880f4058cc3d2745c709deee3131046782779f27e0f9dbff9f03d14e07543e03828026336c48b947f9d471788f23aa3381de',
 		'fee':'1' 
 	},
@@ -525,25 +526,28 @@ $(document).ready(function() {
 				var rs = 0;
 				var rsfirst = 0;
 				var rslast = 0;
-				var rs2last = 0;
 
-				if(o.script.chunks.length>=2){
+				if(o.script.chunks[o.script.chunks.length-1]==174){
+					rs = (Crypto.util.bytesToHex((o.script.buffer))).match(/.{1,2}/g);
+					rsfirst = rs[0];
+					rslast = rs[rs.length-1];
+				} else if(o.script.chunks.length>=2){
 					rs = (Crypto.util.bytesToHex((o.script.chunks[o.script.chunks.length-1]))).match(/.{1,2}/g);
 					rsfirst = rs[0];
 					rslast = rs[rs.length-1];
-					rs2last = rs[rs.length-2];
 				}
 
-				var hasRs = ((o.script.chunks[0] == 0 && rslast=='ae' && rs2last=='53')? true : false);
+				var hasRs = ((rs && rslast=='ae') ? true : false);
 				html += '<tr>';
 				html += '<td>'+(i+1)+'</td>';
 				html += '<td><a href="http://www.blockchain.info/tx/'+txid+'" target="_blank">'+txid+'</a><span class="text-muted">:'+o.outpoint.index+'</span></td>';
-				html += '<td><span class="glyphicon '+((hasRs==true)?'glyphicon-ok-circle':'glyphicon-remove-circle')+'"></span></td>';
+				html += '<td><span class="glyphicon '+((hasRs==true) ? 'glyphicon-ok-circle' : 'glyphicon-remove-circle')+'"></span></td>';
 				html += '<td>'+((hasRs)==true?parseInt(rsfirst,16)-80:'0')+'</td>';
-				html += '<td>'+((hasRs==true)?o.script.chunks.length-2:'0')+'</td>';
+				html += '<td>'+(((hasRs==true) && o.script.chunks[o.script.chunks.length-1]!=174)?o.script.chunks.length-2:'0')+'</td>';
 				html += '</tr>';
 				$(html).appendTo("#verifyTxData .inputs tbody");
 			});
+
 			$("#verifyTxData").removeClass('hidden');
 			result = true;
 		} catch(e) {
@@ -741,7 +745,7 @@ $(document).ready(function() {
 	});
 
 	$("#transactionCreateBtn").click(function(){
-		$("#transactionCreate").removeClass('show').addClass('hidden').fadeIn();		
+		$("#transactionCreate").removeClass('show').addClass('hidden').fadeIn();
 		if(unspentTx){
 			$("#addressBalanceMsg").fadeOut();
 			var sendTx = new Bitcoin.Transaction();
@@ -752,6 +756,7 @@ $(document).ready(function() {
 				var n = $(o).find("tx_output_n").text();
 				totalInTx += ($(o).find("value").text()*1)/100000000;
 				sendTx.addInput(tx, n);
+				sendTx.ins[i].script = new Bitcoin.Script(Crypto.util.hexToBytes($("#newTransaction .redeemScript").val().toLowerCase()));
 			});
 
 			$.each($("#recipients").children(),function(i,o){
@@ -783,21 +788,25 @@ $(document).ready(function() {
 			var txNew = new Bitcoin.Transaction(deserialized);
 
 			$.each(deserialized.ins, function(i,o){
-				var redeemScript = new Bitcoin.Script(o.script.chunks[o.script.chunks.length-1]);
+				var redeemScript = (o.script.chunks[o.script.chunks.length-1]==174) ? o.script : new Bitcoin.Script(o.script.chunks[o.script.chunks.length-1]);
 				var sighash = txNew.hashTransactionForSignature(redeemScript, 0, 1);
 				var signature = eckey.sign(sighash);
 				signature.push(parseInt(1, 10));
 
 				var s = new Bitcoin.Script();
 				s.writeOp(0);
-				s.writeBytes(signature)
-				for(var y=0; y<deserialized.ins[i].script.chunks.length; y++){
-					if(deserialized.ins[i].script.chunks[y]!=0){
-						var c = new Bitcoin.Script(deserialized.ins[i].script.chunks[y]);
-						s.writeBytes(c.buffer);
+				s.writeBytes(signature);
+
+				if(o.script.chunks[o.script.chunks.length-1]!=174){
+					for(var y=0; y<deserialized.ins[i].script.chunks.length; y++){
+						if(deserialized.ins[i].script.chunks[y]!=0){
+							var c = new Bitcoin.Script(deserialized.ins[i].script.chunks[y]);
+							s.writeBytes(c.buffer);
+						}
 					}
 				}
-				s.writeBytes(redeemScript);
+
+				s.writeBytes(redeemScript.buffer);
 				txNew.ins[i].script = s;
 			});
 
