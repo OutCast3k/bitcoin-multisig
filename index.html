@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -523,18 +524,15 @@ $(document).ready(function() {
 			$.each(deserialized.ins, function(i,o){
 				var txid = Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash).reverse());
 				var rs = 0;
-				var rsfirst = 0;
-				var rslast = 0;
 
 				if(o.script.chunks[o.script.chunks.length-1]==174){
 					rs = (Crypto.util.bytesToHex((o.script.buffer))).match(/.{1,2}/g);
-					rsfirst = rs[0];
-					rslast = rs[rs.length-1];
 				} else if(o.script.chunks.length>=2){
 					rs = (Crypto.util.bytesToHex((o.script.chunks[o.script.chunks.length-1]))).match(/.{1,2}/g);
-					rsfirst = rs[0];
-					rslast = rs[rs.length-1];
 				}
+
+				var rsfirst = rs[0];
+				var rslast = rs[rs.length-1];
 
 				var hasRs = ((rs && rslast=='ae') ? true : false);
 				html += '<tr>';
@@ -788,6 +786,7 @@ $(document).ready(function() {
 
 			$.each(deserialized.ins, function(i,o){
 				var redeemScript = (o.script.chunks[o.script.chunks.length-1]==174) ? o.script : new Bitcoin.Script(o.script.chunks[o.script.chunks.length-1]);
+
 				var sighash = txNew.hashTransactionForSignature(redeemScript, 0, 1);
 				var signature = eckey.sign(sighash);
 				signature.push(parseInt(1, 10));
@@ -796,7 +795,9 @@ $(document).ready(function() {
 				s.writeOp(0);
 				s.writeBytes(signature);
 
-				if(o.script.chunks[o.script.chunks.length-1]!=174){
+				if(o.script.chunks[o.script.chunks.length-1]==174){
+					s.writeBytes(redeemScript.buffer);
+				} else {
 					for(var y=0; y<deserialized.ins[i].script.chunks.length; y++){
 						if(deserialized.ins[i].script.chunks[y]!=0){
 							var c = new Bitcoin.Script(deserialized.ins[i].script.chunks[y]);
@@ -805,7 +806,6 @@ $(document).ready(function() {
 					}
 				}
 
-				s.writeBytes(redeemScript.buffer);
 				txNew.ins[i].script = s;
 			});
 
