@@ -92,6 +92,8 @@
 							</div>
 							<br>
 
+							<div id="multiSigErrorMsg" class="alert alert-danger" style="display:none;"></div>
+
 							<div class="alert alert-success hidden" id="multiSigData">
 								<label>Address</label>
 								<p>Payment should be made to this address:</p>
@@ -608,9 +610,12 @@ $(document).ready(function() {
 		$("#multiSigData").removeClass('show').addClass('hidden').fadeOut();
 		$("#uncompressedPubKeys .pubkey").parent().removeClass('has-error');
 		$("#releaseCoins").parent().removeClass('has-error');
+		$("#multiSigErrorMsg").hide();
+
 
 		if((isNaN($("#releaseCoins").val())) || ((!isNaN($("#releaseCoins").val())) && ($("#releaseCoins").val()>$("#uncompressedPubKeys .pubkey").length || $("#releaseCoins").val()*1<=0 || $("#releaseCoins").val()*1>=20))){
 			$("#releaseCoins").parent().addClass('has-error');
+			$("#multiSigErrorMsg").html("Minimum signatures required is invalid").fadeIn();
 		}
 
 		$.each($("#uncompressedPubKeys .pubkey"),function(i,o){
@@ -619,6 +624,7 @@ $(document).ready(function() {
 				pubkeys.push(Crypto.util.hexToBytes($(o).val()));
 			} else {
 				$(o).parent().addClass('has-error');
+				$("#multiSigErrorMsg").html("One or more pubkey is invalid or missing").fadeIn();
 			}
 		});
 
@@ -848,7 +854,7 @@ $(document).ready(function() {
 				$("#rawTransactionStatus").html(unescape($(data).find("response").text()).replace(/\+/g,' ')).removeClass('hidden');
 				if($(data).find("result").text()==1){
 					$("#rawTransactionStatus").addClass('alert-success').removeClass('alert-danger');
-					$("#rawTransactionStatus").html($("#status").html()+' txid: '+$(data).find("txid").text());
+					$("#rawTransactionStatus").html('txid: '+$(data).find("txid").text());
 				} else {
 					$("#rawTransactionStatus").addClass('alert-danger').removeClass('alert-success');
 				}
