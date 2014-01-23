@@ -72,7 +72,7 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h2>New Multi Sig Address <small>from the comfort of your browser</small></h2>
-							<p>Public keys can be <a href="#newKeys" id="newkeysbtn">generated in your browser</a> or exported from your <a href="javascript:;">bitcoin client</a>.</p>
+							<p>Public keys can be <a href="#newKeys" id="newkeysbtn">generated in your browser</a> or exported from your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a>.</p>
 							<p>Enter the uncompressed public keys of all the participants, to create a <a href="https://en.bitcoin.it/wiki/Address#Multi-signature_addresses" target="_blank">multi signature address</a>. Maximum of 20 allowed.</p>
 							<div id="uncompressedPubKeys" class="row">
 								<div class="form-inline">
@@ -146,7 +146,7 @@
 
 				<div class="tab-pane" id="newKeys">
 					<h2>New Keys <small>inside your browser using javascript</small></h2>
-					<p>Creating a multi signature address requires multiple uncompressed public keys, these can be extracted from the <a href="javascript:;">bitcoin client</a> or generated using the form below. <b>Any keys used, should be stored safely as they will be needed later to redeem the bitcoins from the multi signature address</b>.</p>
+					<p>Creating a multi signature address requires multiple uncompressed public keys, these can be extracted from the <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a> or generated using the form below. <b>Any keys used, should be stored safely as they will be needed later to redeem the bitcoins from the multi signature address</b>.</p>
 
 					<label>Address</label>
 					<input id="newBitcoinAddress" type="text" class="form-control" placeholder="1" readonly>
@@ -298,8 +298,8 @@
 
 				<div class="tab-pane" id="sign">
 					<h2>Sign Transaction <small>once a transaction has been verified</small></h2>
-					<p>Complete the form below to sign a transaction in your browser, or follow these instructions to use your <a href="javascript:;">desktop client</a>.</p>
-				
+					<p>Complete the form below to sign a transaction in your browser, or follow these instructions to use your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsSign">desktop client</a>.</p>
+
 					<div class="row">
 						<div class="col-xs-12">
 							<label for="signPrivateKey">Private key</label>
@@ -325,7 +325,7 @@
 
 				<div class="tab-pane" id="broadcast">
 					<h2>Broadcast Transaction <small>into the bitcoin network</small></h2>
-					<p>Once everyone has signed the transaction it can be entered into the form below and broadcasted into the bitcoin network via <a href="https://coinb.in" target="_blank">coinb.in</a>, or you can follow these instructions to use your <a href="javascript:;">desktop client</a>.</p>
+					<p>Once everyone has signed the transaction it can be entered into the form below and broadcasted into the bitcoin network via <a href="https://coinb.in" target="_blank">coinb.in</a>, or you can follow these instructions to use your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsBroadcast">desktop client</a>.</p>
 					<textarea class="form-control" style="height:125px" id="rawTransaction"></textarea>
 					<br>
 					<div id="rawTransactionStatus" class="alert hidden">
@@ -346,6 +346,12 @@
 					<p>This page uses javascript to generate a <a href="https://en.bitcoin.it/wiki/Address#Multi-signature_addresses" target="_blank">multi signature address</a>, the buyer sends the funds to the address. Once the agreement between all parties has completed a transaction can be created using the redeem script which is then signed by the participants. You can then broadcast the signed transaction into the network, releasing the funds to the choosen address.</p>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div class="container text-right">
+        		<p class="text-muted"><a href="https://coinb.in/multisig/">Bitcoin MultiSig</a> Version 0.1 beta By <a href="https://bitcointalk.org/index.php?action=profile;u=34834" target="_blank">OutCast3k</a>.</p>
 		</div>
 	</div>
 
@@ -378,13 +384,93 @@
 		</div>
 	</div>
 
-	<div id="footer">
-		<div class="container text-right">
-        		<p class="text-muted"><a href="https://coinb.in/multisig/">Bitcoin MultiSig</a> Version 0.1 beta By <a href="https://bitcointalk.org/index.php?action=profile;u=34834" target="_blank">OutCast3k</a>.</p>
+
+	<!-- agent modal -->
+
+	<!-- client instructions sign -->
+	<div class="modal fade" id="clientInstructionsSign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Signing with a Desktop Client</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>If you wish to manually sign your transaction using another bitcoin client, you can follow the instructions below.</p>
+					<p><b>Bitcoin-qt</b></p>
+					<ul style="list-style-type:decimal;">
+						<li>Load bitcoin-qt</li>
+						<li>From the toolbar select, Help -&gt; Debug Window -&gt; and then choose the Console Tab.</li>
+						<li>Enter the following: signrawtransaction &lt;hex string&gt; [{"<b>txid</b>":<i>txid</i>,"<b>vout</b>":<i>n</i>,"<b>scriptPubKey</b>":<i>hex</i>,"<b>redeemScript</b>":<i>hex</i>}]</li>
+					</ul>
+
+					<p>Where <i>hex, txid, n, pubkey and script</i> is listed, replaced with the appropriate value.</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
 		</div>
 	</div>
+	<!-- client instructions sign -->
 
-	<!-- multisig agent modal -->
+	<!-- client instructions broadcast -->
+	<div class="modal fade" id="clientInstructionsBroadcast" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Broadcast with a Desktop Client</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>If you wish to manually broadcast your transaction using another bitcoin client, you can follow the instructions below.</p>
+					<p><b>Bitcoin-qt</b></p>
+					<ul style="list-style-type:decimal;">
+						<li>Load bitcoin-qt</li>
+						<li>From the toolbar select, Help -&gt; Debug Window -&gt; and then choose the Console Tab.</li>
+						<li>Enter the following: sendrawtransaction &lt;hex string&gt;</li>
+					</ul>
+
+					<p>Where <i>hex</i> is listed, replaced with the appropriate value.</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- client instructions broadcast -->
+
+	<!-- client instructions pubkeys -->
+	<div class="modal fade" id="clientInstructionsPubkeys" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Locating pubkeys with a Desktop Client</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>If you wish to manually broadcast your transaction using another bitcoin client, you can follow the instructions below.</p>
+					<p><b>Bitcoin-qt</b></p>
+					<ul style="list-style-type:decimal;">
+						<li>Load bitcoin-qt</li>
+						<li>From the toolbar select, Help -&gt; Debug Window -&gt; and then choose the Console Tab.</li>
+						<li>Enter the following: validateaddress &lt;bitcoinaddress&gt;</li>
+					</ul>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- client instructions keys -->
 
 	<!-- qrcode modal -->
 	<div class="modal fade" id="modalQrcode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
