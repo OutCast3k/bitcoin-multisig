@@ -1,11 +1,11 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 	<head>
 		
 		<title>Bitcoin Multi Signature Address</title>
         	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<meta name="keywords" content="bitcoin, multi, signature, escrow, trust, free" /> 
+		<meta name="keywords" content="bitcoin, multi, signature, escrow, trust, free" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -28,7 +28,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="#home" class="navbar-brand" id="homebtn"><b>Bitcoin MultiSig</b> <small>beta</small></a>
+					<a href="#home" class="navbar-brand" id="homeBtn"><b>Bitcoin MultiSig</b> <small>beta</small></a>
 				</div>
 
 				<div class="collapse navbar-collapse">
@@ -63,7 +63,7 @@
 						<p>Multi signature addresses generated in your browser!</p>
 						<p>This page is written in javascript and is <a href="https://github.com/OutCast3k/bitcoin-multisig/" target="_bank">open source</a>.</p>
 						<p>
-							<a class="btn btn-lg btn-primary" href="#about" role="button" id="readmorebtn">Read more...</a>
+							<a class="btn btn-lg btn-primary" href="#about" role="button" id="readmoreBtn">Read more...</a>
 						</p>
 					</div>
 				</div>
@@ -72,12 +72,12 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h2>New Multi Sig Address <small>from the comfort of your browser</small></h2>
-							<p>Public keys can be <a href="#newKeys" id="newkeysbtn">generated in your browser</a> or exported from your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a>.</p>
+							<p>Public keys can be <a href="#newKeys" id="newKeysBtn">generated in your browser</a> or exported from your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a>.</p>
 							<p>Enter the uncompressed public keys of all the participants, to create a <a href="https://en.bitcoin.it/wiki/Address#Multi-signature_addresses" target="_blank">multi signature address</a>. Maximum of 20 allowed.</p>
 							<div id="uncompressedPubKeys" class="row">
 								<div class="form-inline">
 									<div class="col-xs-11">
-										<input type="text" class="form-control pubkey" placeholder="04"> 
+										<input type="text" class="form-control pubkey" placeholder="04">
 									</div>
 									<a href="javascript:;" class="addressAdd"><span class="glyphicon glyphicon-plus"></span></a>
 									<br><br>
@@ -87,7 +87,7 @@
 							<p>Enter the amount of signatures required to release the coins</p>
 							<div class="row">
 								<div class="col-xs-3">
-									<input type="text" class="form-control" value="2" id="releaseCoins"> 
+									<input type="text" class="form-control" value="2" id="releaseCoins">
 								</div>
 							</div>
 							<br>
@@ -100,7 +100,7 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="input-group">
-											<input type="text" class="form-control address" value="" readonly> 
+											<input type="text" class="form-control address" value="" readonly>
 											<span class="input-group-btn">
 												<button class="multisigaddressQrcodeBtn btn btn-default" type="button" data-toggle="modal" data-target="#modalQrcode"><span class="glyphicon glyphicon-qrcode"></span></button>
 											</span>
@@ -127,7 +127,7 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="input-group">
-											<select class="form-control" id="multisigAgentSelect"> 
+											<select class="form-control" id="multisigAgentSelect">
 												<option value="">OutCast3k</option>
 												<option value="">ssinc</option>
 											</select>
@@ -201,7 +201,7 @@
 					<div id="recipients">
 						<div class="row recipient">
 							<div class="col-xs-8">
-								<input type="text" class="form-control address" placeholder="1"> 
+								<input type="text" class="form-control address" placeholder="1">
 							</div>
 							<div class="col-xs-3">
 								<input type="text" class="form-control amount" placeholder="0.00">
@@ -215,9 +215,14 @@
 					<div class="row">
 						<div class="col-xs-3">
 							<label>Transacton Fee</label>
-							<input type="text" id="transactionFee" class="form-control" value="0.0000" readonly> 
+							<input type="text" id="transactionFee" class="form-control" value="0.0000" readonly>
 						</div>
 					</div>
+
+					<br>
+
+					<p class="text-muted">Make sure you include an adequate fee, otherwise your transaction maybe rejected. 0.0005 btc or more is recommended.</p>
+
 					<br>
 
 					<div id="transactionCreate" class="alert alert-success hidden">
@@ -248,7 +253,7 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="input-group">
-									<input type="text" class="form-control address" value="" readonly> 
+									<input type="text" class="form-control address" value="" readonly>
 									<span class="input-group-btn">
 										<button class="multisigaddressQrcodeBtn btn btn-default" type="button" data-toggle="modal" data-target="#modalQrcode"><span class="glyphicon glyphicon-qrcode"></span></button>
 									</span>
@@ -292,8 +297,8 @@
 
 					<div id="verifyStatus" class="alert alert-danger hidden">Unable to decode</div>
 
-					<input type="button" value="Submit" class="btn btn-primary" id="verifybtn">
-					<br><br>			
+					<input type="button" value="Submit" class="btn btn-primary" id="verifyBtn">
+					<br><br>
 				</div>
 
 				<div class="tab-pane" id="sign">
@@ -319,7 +324,7 @@
 						<textarea class="form-control script" style="height:160px" readonly></textarea>
 					</div>
 
-					<input type="button" value="Submit" class="btn btn-primary" id="signbtn">
+					<input type="button" value="Submit" class="btn btn-primary" id="signBtn">
 					<br><br>
 				</div>
 
@@ -495,9 +500,7 @@
 	</body>
 </html>
 
-<script type="text/javascript">
-$(document).ready(function() {
-
+<script type="text/javascript"> $(document).ready(function() {
 	var uid = "1";
 	var apikey = "12345678901234567890123456789012";
 	var unspentTx = false;
@@ -507,7 +510,7 @@ $(document).ready(function() {
 		'url':'https://bitcointalk.org/index.php?action=profile;u=34834',
 		'address':'15xK8XyfTjXYVKkB42TDjP7A7FtyfNZqRP',
 		'pubkey':'04b6231cc602740c29436eafbb6448880f4058cc3d2745c709deee3131046782779f27e0f9dbff9f03d14e07543e03828026336c48b947f9d471788f23aa3381de',
-		'fee':'1' 
+		'fee':'1'
 	},
 	'ssinc':{
 		'email':'sacrosanctinc@gmail.com',
@@ -603,13 +606,14 @@ $(document).ready(function() {
 				html += '<td>'+(i+1)+'</td>';
 				html += '<td><a href="http://www.blockchain.info/address/'+addr+'" target="_blank">'+addr+'</a></td>';
 				html += '<td>'+(parseFloat(Bitcoin.Util.formatValue(o.value.reverse()))).toFixed(8)+'</td>';
-				html += '</tr>';				
+				html += '</tr>';
 				$(html).appendTo("#verifyTxData .outputs tbody");
 			});
 
 			html = '';
 			$("#verifyTxData .inputs tbody").html("");
 			$.each(deserialized.ins, function(i,o){
+				html = '';
 				var txid = Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash).reverse());
 				var rs = 0;
 
@@ -668,6 +672,36 @@ $(document).ready(function() {
 		}
 
 		return result;
+	}
+
+	function scriptListPubkey(redeemScript){
+		var r = [];
+		for(var i=1;i<redeemScript.chunks.length-2;i++){
+			r.push(Crypto.util.bytesToHex(redeemScript.chunks[i]));
+		}
+		return r;
+	}
+
+	function scriptListSigs(scriptSig){
+		var r = [];
+		if (scriptSig.chunks[0]==0 && scriptSig.chunks[scriptSig.chunks.length-1][scriptSig.chunks[scriptSig.chunks.length-1].length-1]==174){
+			for(var i=1;i<scriptSig.chunks.length-1;i++){				
+				r.push(Crypto.util.bytesToHex(scriptSig.chunks[i]));
+			}
+		}
+		return r;
+	}
+
+	function pubkeyPosition(redeemScript, pubkey){
+		var r = 0;
+		for(var i=1;i<redeemScript.chunks.length-2;i++){
+			var rspub = Crypto.util.bytesToHex(redeemScript.chunks[i]);
+			if(rspub==pubkey){
+				r = i;
+				break;
+			}
+		}
+		return r;
 	}
 
 	$("#agentUse").click(function(){
@@ -742,14 +776,13 @@ $(document).ready(function() {
 		$("#qrcode").attr('src','https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:'+$('.address',thisbtn).val());
 	});
 
-
-	$("#homebtn").click(function(e){
+	$("#homeBtn").click(function(e){
 		e.preventDefault();
 		$("ul, li").removeClass("active");
 		$(this).tab('show');
 	});
 
-	$("#readmorebtn, #newkeysbtn").click(function(e){
+	$("#readmoreBtn").click(function(e){
 		e.preventDefault();
 		$("ul, li").removeClass("active");
 		$(this).tab('show');
@@ -761,7 +794,7 @@ $(document).ready(function() {
 			$("#uncompressedPubKeys").append(clone);
 			$("#uncompressedPubKeys .glyphicon-plus:last").removeClass('glyphicon-plus').addClass('glyphicon-minus');
 			$("#uncompressedPubKeys .glyphicon-minus:last").parent().removeClass('addressAdd').addClass('addressRemove');
-			$("#uncompressedPubKeys .addressRemove").unbind("");	
+			$("#uncompressedPubKeys .addressRemove").unbind("");
 			$("#uncompressedPubKeys .addressRemove").click(function(){
 				$(this).parent().fadeOut().remove();
 			});
@@ -774,7 +807,7 @@ $(document).ready(function() {
 			$("#recipients").append(clone);
 			$("#recipients .glyphicon-plus:last").removeClass('glyphicon-plus').addClass('glyphicon-minus');
 			$("#recipients .glyphicon-minus:last").parent().removeClass('addressAdd').addClass('addressRemoveTo');
-			$("#recipients .addressRemoveTo").unbind("");	
+			$("#recipients .addressRemoveTo").unbind("");
 			$("#recipients .addressRemoveTo").click(function(){
 				$(this).parent().parent().fadeOut().remove();
 			});
@@ -795,7 +828,6 @@ $(document).ready(function() {
 		$("#newBitcoinAddress").val(pub.toString());
 		$("#newPrivKey").val(priv.toString());
 		$("#newPubKey").val(Crypto.util.bytesToHex(eckey.getPub()));
-
 	});
 
 	$("#newTransaction .redeemScript").keyup(function(){
@@ -851,7 +883,7 @@ $(document).ready(function() {
 			$.each($("#recipients").children(),function(i,o){
 				var addr = new Bitcoin.Address($(".address",o).val());
 				var amount = new BigInteger('' + Math.round(($(".amount",o).val()*1) * 1e8), 10);
-				totalOutTx += $(".amount",o).val()*1; 
+				totalOutTx += $(".amount",o).val()*1;
 				sendTx.addOutput(addr, amount);
 			});
 
@@ -868,39 +900,47 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#signbtn").click(function(){
+	$("#signBtn").click(function(){
 		var res = parseBase58Check($("#signPrivateKey").val());
 		if(res['result']==1){
 			$("#signPrivateKey").parent().removeClass('has-error');
-			var eckey = new Bitcoin.ECKey(res['hash']);
+
+			// generate a pubkey from the signing transaction (so we can check its in the redeemScript)
+			var secret = Bitcoin.Base58.decode($("#signPrivateKey").val()).slice(1, 33);
+			var eckey = new Bitcoin.ECKey(secret);
+			var pubkey = eckey.getPub();
+
+			// deserialize and the transation so we can manipulate it
 			var deserialized = Bitcoin.Transaction.deserialize($("#signTransaction").val());
 			var txNew = new Bitcoin.Transaction(deserialized);
 
 			$.each(deserialized.ins, function(i,o){
-				var redeemScript = (o.script.chunks[o.script.chunks.length-1]==174) ? o.script : new Bitcoin.Script(o.script.chunks[o.script.chunks.length-1]);
-
-				var sighash = txNew.hashTransactionForSignature(redeemScript, 0, 1);
+				// each input
+				var redeemScript = (o.script.chunks[o.script.chunks.length-1]==174) ? o.script : new Bitcoin.Script(o.script.chunks[o.script.chunks.length-1]);				
+				var sighash = txNew.hashTransactionForSignature(redeemScript, i, 1);
 				var signature = eckey.sign(sighash);
 				signature.push(parseInt(1, 10));
 
 				var s = new Bitcoin.Script();
 				s.writeOp(0);
-				s.writeBytes(signature);
 
 				if(o.script.chunks[o.script.chunks.length-1]==174){
-					s.writeBytes(redeemScript.buffer);
-				} else {
-					for(var y=0; y<deserialized.ins[i].script.chunks.length; y++){
-						if(deserialized.ins[i].script.chunks[y]!=0){
-							var c = new Bitcoin.Script(deserialized.ins[i].script.chunks[y]);
-							s.writeBytes(c.buffer);
+					s.writeBytes(signature);
+				} else if (o.script.chunks[0]==0 && o.script.chunks[o.script.chunks.length-1][o.script.chunks[o.script.chunks.length-1].length-1]==174){
+					var pubkeyList = scriptListPubkey(redeemScript);
+					var sigsList = scriptListSigs(o.script);
+					sigsList.push(Crypto.util.bytesToHex(signature));
+					for(x in pubkeyList){
+						for(y in sigsList){
+							if(Bitcoin.ECDSA.verify(sighash, Crypto.util.hexToBytes(sigsList[y]), Crypto.util.hexToBytes(pubkeyList[x]))){
+								s.writeBytes(Crypto.util.hexToBytes(sigsList[y]));
+							}
 						}
 					}
 				}
-
+				s.writeBytes(redeemScript.buffer);
 				txNew.ins[i].script = s;
 			});
-
 			$("#signedData textarea").val(Crypto.util.bytesToHex(txNew.serialize()));
 			$("#signedData").removeClass('hidden').addClass('show').fadeIn();
 		} else {
@@ -908,8 +948,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#verifybtn").click(function(){
-
+	$("#verifyBtn").click(function(){
 		if(($("#verifyTransaction").val()).match(/[^a-f0-9]+/i)){
 			$(".verifyData").addClass("hidden");
 			$("#verifyStatus").removeClass('hidden').fadeOut().fadeIn();
@@ -935,7 +974,7 @@ $(document).ready(function() {
 			dataType: "xml",
 			error: function() {
 				alert('Failed to submit, please try again');
-			}, 
+			},
 			success: function(data)	{
 				$("#rawTransactionStatus").html(unescape($(data).find("response").text()).replace(/\+/g,' ')).removeClass('hidden');
 				if($(data).find("result").text()==1){
