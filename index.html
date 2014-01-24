@@ -692,18 +692,6 @@
 		return r;
 	}
 
-	function pubkeyPosition(redeemScript, pubkey){
-		var r = 0;
-		for(var i=1;i<redeemScript.chunks.length-2;i++){
-			var rspub = Crypto.util.bytesToHex(redeemScript.chunks[i]);
-			if(rspub==pubkey){
-				r = i;
-				break;
-			}
-		}
-		return r;
-	}
-
 	$("#agentUse").click(function(){
 		var count = 0;
 		var len = $(".addressRemove").length;
