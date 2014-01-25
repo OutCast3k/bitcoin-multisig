@@ -71,7 +71,7 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h2>New Multi Sig Address <small>from the comfort of your browser</small></h2>
-							<p>Public keys can be <a href="#newKeys" data-toggle="tab">generated in your browser</a> or exported from your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a>.</p>
+							<p>Public keys can be <a href="#newKeys" data-toggle="tab">generated in your browser</a> or exported from your <a href="#" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a>.</p>
 							<p>Enter the uncompressed public keys of all the participants, to create a <a href="https://en.bitcoin.it/wiki/Address#Multi-signature_addresses" target="_blank">multi signature address</a>. Maximum of 20 allowed.</p>
 							<div id="uncompressedPubKeys" class="row">
 								<div class="form-inline">
@@ -145,7 +145,7 @@
 
 				<div class="tab-pane" id="newKeys">
 					<h2>New Keys <small>inside your browser using javascript</small></h2>
-					<p>Creating a multi signature address requires multiple uncompressed public keys, these can be extracted from the <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a> or generated using the form below. <b>Any keys used, should be stored safely as they will be needed later to redeem the bitcoins from the multi signature address</b>.</p>
+					<p>Creating a multi signature address requires multiple uncompressed public keys, these can be extracted from the <a href="#" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a> or generated using the form below. <b>Any keys used, should be stored safely as they will be needed later to redeem the bitcoins from the multi signature address</b>.</p>
 
 					<label>Address</label>
 					<input id="newBitcoinAddress" type="text" class="form-control" placeholder="1" readonly>
@@ -302,7 +302,7 @@
 
 				<div class="tab-pane" id="sign">
 					<h2>Sign Transaction <small>once a transaction has been verified</small></h2>
-					<p>Complete the form below to sign a transaction in your browser, or follow these instructions to use your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsSign">desktop client</a>.</p>
+					<p>Complete the form below to sign a transaction in your browser, or follow these instructions to use your <a href="#" data-toggle="modal" data-target="#clientInstructionsSign">desktop client</a>.</p>
 
 					<div class="row">
 						<div class="col-xs-12">
@@ -329,7 +329,7 @@
 
 				<div class="tab-pane" id="broadcast">
 					<h2>Broadcast Transaction <small>into the bitcoin network</small></h2>
-					<p>Once everyone has signed the transaction it can be entered into the form below and broadcasted into the bitcoin network via <a href="https://coinb.in" target="_blank">coinb.in</a>, or you can follow these instructions to use your <a href="javascript:;" data-toggle="modal" data-target="#clientInstructionsBroadcast">desktop client</a>.</p>
+					<p>Once everyone has signed the transaction it can be entered into the form below and broadcasted into the bitcoin network via <a href="https://coinb.in" target="_blank">coinb.in</a>, or you can follow these instructions to use your <a href="#" data-toggle="modal" data-target="#clientInstructionsBroadcast">desktop client</a>.</p>
 					<textarea class="form-control" style="height:125px" id="rawTransaction"></textarea>
 					<br>
 					<div id="rawTransactionStatus" class="alert hidden">
