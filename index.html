@@ -600,11 +600,11 @@
 			$("#verifyTxData .outputs tbody").html("");
 			var html = '';
 			$.each(deserialized.outs, function(i,o){
-				console.log(o);
+				var addr = '';
 				if(o.script.chunks.length==5){
-					var addr = pubkey2address(o.script.chunks[2]);
+					addr = pubkey2address(o.script.chunks[2]);
 				} else {
-					var addr = pubkey2address(o.script.chunks[1],0x05);
+					addr = pubkey2address(o.script.chunks[1], 0x05);
 				}
 				html += '<tr>';
 				html += '<td>'+(i+1)+'</td>';
