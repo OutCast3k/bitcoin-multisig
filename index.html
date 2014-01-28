@@ -548,9 +548,9 @@
 		return {'address':address,'redeemScript':redeemScript};
 	}
 
-	function pubkey2address(h){
+	function pubkey2address(h,v){
 		var x = h;
-		x.unshift(0x00);
+		x.unshift(v||0x00);
 		var r = x;
 		r = Crypto.SHA256(Crypto.SHA256(r,{asBytes: true}),{asBytes: true});
 		var checksum = r.slice(0,4);
@@ -600,14 +600,19 @@
 			$("#verifyTxData .outputs tbody").html("");
 			var html = '';
 			$.each(deserialized.outs, function(i,o){
-				var addr = pubkey2address(o.script.chunks[2]);
+				console.log(o);
+				if(o.script.chunks.length==5){
+					var addr = pubkey2address(o.script.chunks[2]);
+				} else {
+					var addr = pubkey2address(o.script.chunks[1],0x05);
+				}
 				html += '<tr>';
 				html += '<td>'+(i+1)+'</td>';
 				html += '<td><a href="http://www.blockchain.info/address/'+addr+'" target="_blank">'+addr+'</a></td>';
 				html += '<td>'+(parseFloat(Bitcoin.Util.formatValue(o.value.reverse()))).toFixed(8)+'</td>';
 				html += '</tr>';
-				$(html).appendTo("#verifyTxData .outputs tbody");
 			});
+			$(html).appendTo("#verifyTxData .outputs tbody");
 
 			html = '';
 			$("#verifyTxData .inputs tbody").html("");
@@ -633,8 +638,8 @@
 				html += '<td>'+((hasRs)==true?parseInt(rsfirst,16)-80:'0')+'</td>';
 				html += '<td>'+(((hasRs==true) && o.script.chunks[o.script.chunks.length-1]!=174)?o.script.chunks.length-2:'0')+'</td>';
 				html += '</tr>';
-				$(html).appendTo("#verifyTxData .inputs tbody");
 			});
+			$(html).appendTo("#verifyTxData .inputs tbody");
 
 			$("#verifyTxData").removeClass('hidden');
 			result = true;
