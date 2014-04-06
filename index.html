@@ -1,10 +1,11 @@
+
 <!DOCTYPE html> 
 <html lang="en">
 	<head>
 		
 		<title>Bitcoin Multi Signature Address</title>
         	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<meta name="keywords" content="bitcoin, multi, signature, escrow, trust, free" />
+		<meta name="keywords" content="bitcoin, multi, signature, escrow, trust, free, opensource" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -27,7 +28,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="#home" class="navbar-brand" id="homeBtn"><b>Bitcoin MultiSig</b> <small>beta</small></a>
+					<a href="#home" class="navbar-brand" id="homeBtn"><b>Bitcoin MultiSig</b></a>
 				</div>
 
 				<div class="collapse navbar-collapse">
@@ -86,7 +87,28 @@
 							<p>Enter the amount of signatures required to release the coins</p>
 							<div class="row">
 								<div class="col-xs-3">
-									<input type="text" class="form-control" value="2" id="releaseCoins">
+									<select id="releaseCoins" class="form-control">
+										<option>1</option>
+										<option selected>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+										<option>20</option>
+									</select>
 								</div>
 							</div>
 							<br>
@@ -148,20 +170,19 @@
 					<p>Creating a multi signature address requires multiple uncompressed public keys, these can be extracted from the <a href="#" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a> or generated using the form below. <b>Any keys used, should be stored safely as they will be needed later to redeem the bitcoins from the multi signature address</b>.</p>
 
 					<label>Address</label>
-					<input id="newBitcoinAddress" type="text" class="form-control" placeholder="1" readonly>
+					<input id="newBitcoinAddress" type="text" class="form-control" placeholder="1" title="Your bitcoin address" readonly>
 					<label>Pubkey (Share this)</label>
-					<input id="newPubKey" type="text" class="form-control" placeholder="04" readonly>
+					<input id="newPubKey" type="text" class="form-control" placeholder="04" title="Your public key" readonly>
 					<label>Privkey (Keep this private)</label>
-					<input id="newPrivKey" type="text" class="form-control" placeholder="5" readonly>
+					<input id="newPrivKey" type="text" class="form-control" placeholder="5" title="Your private key" readonly>
 					<br>
 					<input type="button" class="btn btn-primary" value="Generate" id="newKeysBtn">
 					<br><br>
 				</div>
 
-
 				<div class="tab-pane" id="newTransaction">
 					<h2>New Transaction <small>release the bitcoins from a multi sig address</small></h2>
-					<p>The form below is used to craft a transaction that should be given to the other users to sign. They will then give you back a signature which you add to the transaction before broadcasting.</p>
+					<p>The form below is used to craft a transaction that should be given to the other users to sign.</p>
 					<label>Redeem Script</label>
 					<div class="row">
 						<div class="col-xs-12">
@@ -184,32 +205,79 @@
 					</div>
 
 					<br>
-					<div id="addressBalanceMsg" class="alert alert-danger" style="display:none;"></div>
 
-					<div class="row">
-						<div class="col-xs-8">
-							<label>Address</label>
+					<ul class="nav nav-tabs" id="putTabs">
+						<li><a href="#txinputs" data-toggle="tab">Inputs (<span id="totalInput">0.00000000</span>)</a></li>
+						<li class="active"><a href="#txoutputs" data-toggle="tab">Outputs (<span id="totalOutput">0.00000000</span>)</a></li>
+					</ul>
+
+					<br>
+
+					<div class="tab-content">
+						<div class="tab-pane fade" id="txinputs">
+							<p>Enter the details of inputs you wish to spend.</p>
+							<div class="row">
+								<div class="col-xs-8">
+									<label>Transaction ID (Txid):</label>
+								</div>
+								<div class="col-xs-1">
+									<label>N</label>
+								</div>
+								<div class="col-xs-2">
+									<label>Amount</label>
+								</div>
+								<div class="col-xs-1">
+								</div>
+							</div>
+
+							<div id="inputs">
+								<div class="row inputs">
+									<div class="col-xs-8">
+										<input type="text" class="form-control txId" placeholder="">
+									</div>
+									<div class="col-xs-1">
+										<input type="text" class="form-control txIdN" placeholder="0" title="Transaction ID Input number">
+									</div>
+									<div class="col-xs-2">
+										<input type="text" class="form-control txIdAmount" placeholder="0.00" title="This field is for accounting purposes only. The entire input will be used.">
+									</div>
+									<div class="col-xs-1">
+										<a href="javascript:;" class="txidAdd"><span class="glyphicon glyphicon-plus"></span></a>
+										<a href="javascript:;" class="txidClear"><span class="glyphicon glyphicon-minus" title="Clear input"></span></a>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="col-xs-3">
-							<label>Amount</label>
-						</div>
-						<div class="col-xs-1">
+
+						<div class="tab-pane fade in active" id="txoutputs">
+							<p>Enter the address and amount you wish to make a payment to.</p>
+							<div class="row">
+								<div class="col-xs-8">
+									<label>Address</label>
+								</div>
+								<div class="col-xs-3">
+									<label>Amount</label>
+								</div>
+								<div class="col-xs-1">
+								</div>
+							</div>
+
+							<div id="recipients">
+								<div class="row recipient">
+									<div class="col-xs-8">
+										<input type="text" class="form-control address" placeholder="1">
+									</div>
+									<div class="col-xs-3">
+										<input type="text" class="form-control amount" placeholder="0.00">
+									</div>
+									<div class="col-xs-1">
+										<a href="javascript:;" class="addressAddTo"><span class="glyphicon glyphicon-plus"></span></a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<div id="recipients">
-						<div class="row recipient">
-							<div class="col-xs-8">
-								<input type="text" class="form-control address" placeholder="1">
-							</div>
-							<div class="col-xs-3">
-								<input type="text" class="form-control amount" placeholder="0.00">
-							</div>
-							<div class="col-xs-1">
-								<a href="javascript:;" class="addressAddTo"><span class="glyphicon glyphicon-plus"></span></a>
-							</div>
-						</div>
-					</div>
 					<br>
 					<div class="row">
 						<div class="col-xs-3">
@@ -223,6 +291,8 @@
 					<p class="text-muted">Make sure you include an adequate fee, otherwise your transaction maybe rejected. 0.0005 btc or more is recommended.</p>
 
 					<br>
+
+					<div id="transactionCreateMsg" class="alert alert-danger" style="display:none;"></div>
 
 					<div id="transactionCreate" class="alert alert-success hidden">
 						<label>Transaction</label>
@@ -341,7 +411,7 @@
 				<div class="tab-pane" id="about">
 					<h2>About</h2>
 					<p><a href="http://www.bitcoin.org">Bitcoin</a> Multi Signature Address Generation within your browser using javascript.</p>
-					<p>Version 0.1 beta, by <a href="https://bitcointalk.org/index.php?action=profile;u=34834" target="_blank">OutCast3k</a>. Using <a href="http://www.jquery.com">jQuery</a>, a modified version <a href="http://www.bitcoinjs.com">bitcoinjs</a> and <a href="http://www.getbootstrap.com">bootstrap 3.0.x</a>.</p>
+					<p>Version 0.2 by <a href="https://bitcointalk.org/index.php?action=profile;u=34834" target="_blank">OutCast3k</a>. Using <a href="http://www.jquery.com">jQuery</a>, a modified version <a href="http://www.bitcoinjs.com">bitcoinjs</a> and <a href="http://www.getbootstrap.com">bootstrap 3.0.x</a>.</p>
 					<p>Compatible with bitcoin-qt</p>
 					<p>Join the discussion <a href="https://bitcointalk.org/index.php?topic=390046" target="_blank">https://bitcointalk.org/index.php?topic=390046</a></p>
 					<p>Github <a href="https://github.com/OutCast3k/bitcoin-multisig">https://github.com/OutCast3k/bitcoin-multisig/</a></p>
@@ -355,7 +425,7 @@
 
 	<div id="footer">
 		<div class="container text-right">
-        		<p class="text-muted"><a href="https://coinb.in/multisig/">Bitcoin MultiSig</a> Version 0.1 beta By <a href="https://bitcointalk.org/index.php?action=profile;u=34834" target="_blank">OutCast3k</a>.</p>
+        		<p class="text-muted"><a href="https://coinb.in/multisig/">Bitcoin MultiSig</a> Version 0.2 By <a href="https://bitcointalk.org/index.php?action=profile;u=34834" target="_blank">OutCast3k</a>.</p>
 		</div>
 	</div>
 
@@ -495,6 +565,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- qrcode modal -->
 
 	</body>
 </html>
@@ -502,7 +573,6 @@
 <script type="text/javascript"> $(document).ready(function() {
 	var uid = "1";
 	var apikey = "12345678901234567890123456789012";
-	var unspentTx = false;
 
 	var agents = {'OutCast3k':{
 		'email':'OutCast3k@gmail.com',
@@ -510,8 +580,7 @@
 		'address':'15xK8XyfTjXYVKkB42TDjP7A7FtyfNZqRP',
 		'pubkey':'04b6231cc602740c29436eafbb6448880f4058cc3d2745c709deee3131046782779f27e0f9dbff9f03d14e07543e03828026336c48b947f9d471788f23aa3381de',
 		'fee':'1'
-	},
-	'ssinc':{
+	},'ssinc':{
 		'email':'sacrosanctinc@gmail.com',
 		'url':'https://bitcointalk.org/index.php?action=profile;u=87778',
 		'address':'1BVgob4Nnn5rWd2SYhJUMcwHGpEJVGUGTq',
@@ -558,7 +627,7 @@
 		return address;
 	}
 
-	function validateAmount(){
+	function validateOutputAmount(){
 		$("#recipients .amount").unbind('');
 		$("#recipients .amount").keyup(function(){
 			if(isNaN($(this).val())){
@@ -571,14 +640,32 @@
 						f += $(o).val()*1;
 					}
 				});
-				var amount = ($("#addressBalance").html() - f).toFixed(8);
-				if(amount>0){
-					$("#transactionFee").val(amount);
-				} else {
-					$("#transactionFee").val(0)
+				$("#totalOutput").html((f).toFixed(8));
+			}
+			totalFee();
+		});
+	}
+
+	function totalFee(){
+		var fee = (($("#totalInput").html()*1) - ($("#totalOutput").html()*1)).toFixed(8);
+		$("#transactionFee").val((fee>0)?fee:'0.00');
+	}
+
+	function totalInputAmount(){
+		$("#totalInput").html('0.00');
+		$.each($("#inputs .txIdAmount"), function(i,o){
+			if(isNaN($(o).val())){
+				$(o).parent().addClass('has-error');
+			} else {
+				$(o).parent().removeClass('has-error');
+				var f = 0;
+				if(!isNaN($(o).val())){
+					f += $(o).val()*1;
 				}
+				$("#totalInput").html((($("#totalInput").html()*1) + (f*1)).toFixed(8));
 			}
 		});
+		totalFee();
 	}
 
 	function validateAddress(){
@@ -604,7 +691,7 @@
 				if(o.script.chunks.length==5){
 					addr = pubkey2address(o.script.chunks[2]);
 				} else {
-					addr = pubkey2address(o.script.chunks[1], 0x05);
+					addr = pubkey2address(o.script.chunks[1],0x05);
 				}
 				html += '<tr>';
 				html += '<td>'+(i+1)+'</td>';
@@ -612,12 +699,12 @@
 				html += '<td>'+(parseFloat(Bitcoin.Util.formatValue(o.value.reverse()))).toFixed(8)+'</td>';
 				html += '</tr>';
 			});
+
 			$(html).appendTo("#verifyTxData .outputs tbody");
 
 			html = '';
 			$("#verifyTxData .inputs tbody").html("");
 			$.each(deserialized.ins, function(i,o){
-				html = '';
 				var txid = Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash).reverse());
 				var rs = 0;
 
@@ -724,8 +811,7 @@
 		$("#releaseCoins").parent().removeClass('has-error');
 		$("#multiSigErrorMsg").hide();
 
-
-		if((isNaN($("#releaseCoins").val())) || ((!isNaN($("#releaseCoins").val())) && ($("#releaseCoins").val()>$("#uncompressedPubKeys .pubkey").length || $("#releaseCoins").val()*1<=0 || $("#releaseCoins").val()*1>=20))){
+		if((isNaN($("#releaseCoins option:selected").html())) || ((!isNaN($("#releaseCoins option:selected").html())) && ($("#releaseCoins option:selected").html()>$("#uncompressedPubKeys .pubkey").length || $("#releaseCoins option:selected").html()*1<=0 || $("#releaseCoins option:selected").html()*1>20))){
 			$("#releaseCoins").parent().addClass('has-error');
 			$("#multiSigErrorMsg").html("Minimum signatures required is invalid").fadeIn();
 		}
@@ -741,7 +827,7 @@
 		});
 
 		if(($("#uncompressedPubKeys .pubkey").parent().hasClass('has-error')==false) && $("#releaseCoins").parent().hasClass('has-error')==false){
-			var rs = Bitcoin.Script.createMultiSigOutputScript($("#releaseCoins").val()*1, pubkeys);
+			var rs = Bitcoin.Script.createMultiSigOutputScript($("#releaseCoins option:selected").html()*1, pubkeys);
 			var multisig = multiSig(rs);
 			$("#multiSigData .address").val(multisig['address']);
 			$("#multiSigData .script").val(multisig['redeemScript']);
@@ -803,9 +889,32 @@
 			$("#recipients .addressRemoveTo").click(function(){
 				$(this).parent().parent().fadeOut().remove();
 			});
-			validateAmount();
+			validateOutputAmount();
 			validateAddress();
 		}
+	});
+
+	$("#inputs .txidAdd").click(function(){
+		var clone = '<div class="row inputs"><br>'+$(this).parent().parent().html()+'</div>';
+		$("#inputs").append(clone);
+		$("#inputs .txidClear:last").remove();
+		$("#inputs .glyphicon-plus:last").removeClass('glyphicon-plus').addClass('glyphicon-minus');
+		$("#inputs .glyphicon-minus:last").parent().removeClass('txidAdd').addClass('txidRemove');
+		$("#inputs .txidRemove").unbind("");
+		$("#inputs .txidRemove").click(function(){
+			$(this).parent().parent().fadeOut().remove();
+			totalInputAmount();
+		});
+		$("#inputs .row:last input").attr('disabled',false);
+		$('#inputs .txIdAmount').tooltip({'placement':'bottom'});
+
+		totalInputAmount();
+	});
+
+	$("#inputs .txIdAmount").change(function(){
+		totalInputAmount();
+	}).keyup(function(){
+		totalInputAmount();
 	});
 
 	$("#newKeysBtn").click(function(){
@@ -823,33 +932,48 @@
 	});
 
 	$("#newTransaction .redeemScript").keyup(function(){
-		unspentTx = false;
 		var multisig = multiSig({'buffer':Crypto.util.hexToBytes($(this).val())});
-		$("#newTransaction .addressFrom").html(multisig['address']);
+		$("#newTransaction .addressFrom").html('<a href="http://www.blockchain.info/address/'+multisig['address']+'" target="_blank">'+multisig['address']+'</a>');
 		$("#addressBalanceLoading").css('display','block');
-		$("#addressBalanceMsg").css('display','none');
+		$("#transactionCreateMsg").css('display','none');
 		$.ajax ({
 			type: "POST",
 			url: "https://coinb.in/api/",
-			data: 'uid='+uid+'&key='+apikey+'&setmodule=addresses&request=unspent&address='+$("#newTransaction .addressFrom").html(),
+			data: 'uid='+uid+'&key='+apikey+'&setmodule=addresses&request=unspent&address='+$("#newTransaction .addressFrom a").html(),
 			dataType: "xml",
 			error: function() {
-				alert('Failed to submit, please try again');
+				alert('Failed to retreive unpsent inputs, please try again');
 			},
 			success: function(data)	{
 				$("#addressBalance").html('0.00');
 
 				if ($(data).find("result:first").text() == 1) {
-					unspentTx = $(data).find("unspent");
 					var bal = 0;
-					$.each($(data).find("unspent").children(),function(i,o){
-						bal += ($(o).find("value").text()*1)/100000000;
+					$("#inputs .txidRemove").click();
+
+					$.each($(data).find("unspent").children(), function(i, o){
+
+						var val = (($(o).find("value").text()*1)/100000000);
+						var txid = (($(o).find("tx_hash").text()).match(/.{1,2}/g).reverse()).join("")+'';
+
+						$("#inputs .txId:last").val(txid);
+						$("#inputs .txIdN:last").val($(o).find("tx_output_n").text());
+						$("#inputs .txIdAmount:last").val(val.toFixed(8));
+						bal += val;
+
+						$("#inputs .row:last input").attr('disabled',true);
+
+						if(i<($(data).find("unspent").children().length-1)){
+							$("#inputs .txidAdd").click();
+						}
 					});
 					$("#addressBalance").html(bal.toFixed(8)).fadeOut().fadeIn();
 					$("#recipients .amount").keyup();
 				} else {
-					$("#addressBalanceMsg").html(unescape($(data).find("response").text()).replace(/\+/g," ")).fadeIn();
+					$("#transactionCreateMsg").html(unescape($(data).find("response").text()).replace(/\+/g," ")).fadeIn();
 				}
+
+				totalInputAmount();
 			},
 			complete: function(){
 				$("#addressBalanceLoading").css('display','none');
@@ -859,37 +983,60 @@
 
 	$("#transactionCreateBtn").click(function(){
 		$("#transactionCreate").removeClass('show').addClass('hidden').fadeIn();
-		if(unspentTx){
-			$("#addressBalanceMsg").fadeOut();
-			var sendTx = new Bitcoin.Transaction();
-			var totalInTx = 0;
-			var totalOutTx = 0;
-			$.each($(unspentTx).children(),function(i,o){
-				var tx = {'hash':Crypto.util.bytesToBase64(Crypto.util.hexToBytes($(o).find("tx_hash").text()))};
-				var n = $(o).find("tx_output_n").text();
-				totalInTx += ($(o).find("value").text()*1)/100000000;
-				sendTx.addInput(tx, n);
-				sendTx.ins[i].script = new Bitcoin.Script(Crypto.util.hexToBytes($("#newTransaction .redeemScript").val().toLowerCase()));
-			});
+		$("#transactionCreateMsg").fadeOut();
 
-			$.each($("#recipients").children(),function(i,o){
-				var addr = new Bitcoin.Address($(".address",o).val());
-				var amount = new BigInteger('' + Math.round(($(".amount",o).val()*1) * 1e8), 10);
-				totalOutTx += $(".amount",o).val()*1;
-				sendTx.addOutput(addr, amount);
-			});
+		var sendTx = new Bitcoin.Transaction();
 
-			if(totalOutTx>totalInTx){
-				$("#addressBalanceMsg").html('You are trying to send more than you have available').fadeOut().fadeIn();
-				return 0;
-			}
-
-			$("#transactionCreate").removeClass('hidden').addClass('show').fadeIn();
-			$("#transactionCreate textarea").val(Crypto.util.bytesToHex(sendTx.serialize()));
-		} else {
-			var r = $("#addressBalanceMsg").html()!='' ? $("#addressBalanceMsg").html() : 'This address has no available balance to spend';
-			$("#addressBalanceMsg").html(r).fadeOut().fadeIn();
+		if((($("#totalOutput").html()*1)>($("#totalInput").html()*1)) || ($("#totalInput").html()*1)==0){
+			$("#transactionCreateMsg").html('You are trying to send more than you have available').fadeOut().fadeIn();
+			return 0;
 		}
+
+		$.each($("#inputs .row"),function(i,o){
+			var txid = $(".txId", o).val();
+			if(txid.match(/^[a-f0-9]+$/i)){
+				var n = $(".txIdN", o).val();
+				if(n.match(/^[0-9]+$/)){
+					var tx = {'hash': Crypto.util.bytesToBase64(Crypto.util.hexToBytes(txid))};
+					sendTx.addInput(tx, n);
+					sendTx.ins[i].script = new Bitcoin.Script(Crypto.util.hexToBytes($("#newTransaction .redeemScript").val().toLowerCase()));
+				} else {
+					$(".txIdN", o).parent().addClass('has-error');
+					$("#transactionCreateMsg").html('One or more input is invalid or missing').fadeOut().fadeIn();
+				}
+			} else {
+				$(".txId", o).parent().addClass('has-error');
+				$("#transactionCreateMsg").html('One or more input transaction id is invalid or missing').fadeOut().fadeIn();
+			}
+		});
+
+		if($("#inputs .txId, #inputs .txIdN").parent().hasClass('has-error')==true){
+			return 0;
+		}
+
+		$.each($("#recipients").children(), function(i, o){
+			var res = parseBase58Check($(".address",o).val());
+			if(res['result']==1){
+				var addr = new Bitcoin.Address($(".address",o).val());
+				if(!isNaN($(".amount",o).val()) && $(".amount",o).val()*1>0){
+					var amount = new BigInteger('' + Math.round(($(".amount",o).val()*1) * 1e8), 10);
+					sendTx.addOutput(addr, amount);
+				} else {
+					$(".amount",o).parent().addClass('has-error');
+					$("#transactionCreateMsg").html('One or more output amount is invalid or missing').fadeOut().fadeIn();
+				}
+			} else {
+				$(".address",o).parent().addClass('has-error');
+				$("#transactionCreateMsg").html('One or more output address is invalid or missing').fadeOut().fadeIn();
+			}
+		});
+
+		if($("#recipients .address, #recipients .amount").parent().hasClass('has-error')==true){
+			return 0;
+		}
+
+		$("#transactionCreate").removeClass('hidden').addClass('show').fadeIn();
+		$("#transactionCreate textarea").val(Crypto.util.bytesToHex(sendTx.serialize()));
 	});
 
 	$("#signBtn").click(function(){
@@ -938,6 +1085,12 @@
 		} else {
 			$("#signPrivateKey").parent().addClass('has-error');
 		}
+	});
+
+	$(".txidClear").click(function(){
+		$("#inputs .row:first input").attr('disabled',false);
+		$("#inputs .row:first input").val("");
+		totalInputAmount();
 	});
 
 	$("#verifyBtn").click(function(){
@@ -993,6 +1146,8 @@
 		return result;
 	}
 
+	$('input[title!=""], span[title!=""]').tooltip({'placement':'bottom'});
+
 	if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
 
 	$('a[data-toggle="tab"]').on('shown', function(e) {
@@ -1005,7 +1160,8 @@
 
 	var entropy = null;
 	genentropy();
-	validateAmount();
+
+	validateOutputAmount();
 	validateAddress();
 });
 </script>
