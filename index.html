@@ -1,4 +1,3 @@
-
 <!DOCTYPE html> 
 <html lang="en">
 	<head>
@@ -705,7 +704,7 @@
 			html = '';
 			$("#verifyTxData .inputs tbody").html("");
 			$.each(deserialized.ins, function(i,o){
-				var txid = Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash).reverse());
+				var txid = Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash));
 				var rs = 0;
 
 				if(o.script.chunks[o.script.chunks.length-1]==174){
@@ -766,21 +765,32 @@
 	}
 
 	function scriptListPubkey(redeemScript){
-		var r = [];
+		var r = {};
 		for(var i=1;i<redeemScript.chunks.length-2;i++){
-			r.push(Crypto.util.bytesToHex(redeemScript.chunks[i]));
+			r[i] = redeemScript.chunks[i];
 		}
 		return r;
 	}
 
 	function scriptListSigs(scriptSig){
-		var r = [];
+		var r = {};
 		if (scriptSig.chunks[0]==0 && scriptSig.chunks[scriptSig.chunks.length-1][scriptSig.chunks[scriptSig.chunks.length-1].length-1]==174){
 			for(var i=1;i<scriptSig.chunks.length-1;i++){				
-				r.push(Crypto.util.bytesToHex(scriptSig.chunks[i]));
+				r[i] = scriptSig.chunks[i];
 			}
 		}
 		return r;
+	}
+
+	function countObject(obj){
+		var count = 0;
+		var i;
+		for (i in obj) {
+			if (obj.hasOwnProperty(i)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	$("#agentUse").click(function(){
@@ -993,7 +1003,7 @@
 		}
 
 		$.each($("#inputs .row"),function(i,o){
-			var txid = $(".txId", o).val();
+			var txid = ($(".txId", o).val()).match(/.{1,2}/g).reverse().join("");
 			if(txid.match(/^[a-f0-9]+$/i)){
 				var n = $(".txIdN", o).val();
 				if(n.match(/^[0-9]+$/)){
@@ -1068,11 +1078,11 @@
 				} else if (o.script.chunks[0]==0 && o.script.chunks[o.script.chunks.length-1][o.script.chunks[o.script.chunks.length-1].length-1]==174){
 					var pubkeyList = scriptListPubkey(redeemScript);
 					var sigsList = scriptListSigs(o.script);
-					sigsList.push(Crypto.util.bytesToHex(signature));
+					sigsList[countObject(sigsList)+1] = signature;
 					for(x in pubkeyList){
 						for(y in sigsList){
-							if(Bitcoin.ECDSA.verify(sighash, Crypto.util.hexToBytes(sigsList[y]), Crypto.util.hexToBytes(pubkeyList[x]))){
-								s.writeBytes(Crypto.util.hexToBytes(sigsList[y]));
+							if(Bitcoin.ECDSA.verify(sighash, sigsList[y], pubkeyList[x])){
+								s.writeBytes(sigsList[y]);
 							}
 						}
 					}
