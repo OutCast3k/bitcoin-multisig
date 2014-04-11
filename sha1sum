@@ -1,9 +1,8 @@
----- Version 0.2 2014.04.06 ----
+---- Version 0.2 2014.04.11 ----
 66c84a3b3549a33997247e1f8032f172453682d3  ./js/bootstrap.js
 15a81fe4074f920898e98b1b42cf11bda26da0a8  ./js/bootstrap.min.js
 add6e1cd5358e701748df05d27b1ea12242ea2bd  ./js/bitcoinjs-min.js
 ae49e56999d82802727455f0ba83b63acd90a22b  ./js/jquery-1.9.1.min.js
-135ade1da89a8e11cefe09775e58009b44bddeb2  ./.htaccess
 ff1c6a04dd80cba8521a850cae728abb41ea9ef3  ./css/bootstrap.min.css
 95d87b7b04ee6dd10a855127ea1bcfa75afdeada  ./css/bootstrap-theme.css
 3b38955d745c3fa36017f3cb7d72ceb18c587e66  ./css/bootstrap-theme.min.css
@@ -15,4 +14,4 @@ ecee9033d9183117d8f59df0e7238e2b24002b24  ./fonts/glyphicons-halflings-regular.s
 c6ea7b1a5bb16b160cc9b8a02f6f6371b5ef7b73  ./fonts/glyphicons-halflings-regular.woff
 536d2b1b2f3462fb122df1922f2e232546f1b11d  ./fonts/glyphicons-halflings-regular.ttf
 650aa219f7c28bf8cf4706af49a6ca9854c166b9  ./README.md
-c2885e04df6b4a2f17acfb7ac607a0d480b4110b  ./index.html
+a33c14e6c3b65cff62474fbe2034d54bcd2efc02  ./index.html
