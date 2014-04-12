@@ -1,4 +1,4 @@
----- Version 0.2 2014.04.11 ----
+---- Version 0.2 2014.04.12 ----
 66c84a3b3549a33997247e1f8032f172453682d3  ./js/bootstrap.js
 15a81fe4074f920898e98b1b42cf11bda26da0a8  ./js/bootstrap.min.js
 add6e1cd5358e701748df05d27b1ea12242ea2bd  ./js/bitcoinjs-min.js
@@ -14,4 +14,4 @@ ecee9033d9183117d8f59df0e7238e2b24002b24  ./fonts/glyphicons-halflings-regular.s
 c6ea7b1a5bb16b160cc9b8a02f6f6371b5ef7b73  ./fonts/glyphicons-halflings-regular.woff
 536d2b1b2f3462fb122df1922f2e232546f1b11d  ./fonts/glyphicons-halflings-regular.ttf
 650aa219f7c28bf8cf4706af49a6ca9854c166b9  ./README.md
-a33c14e6c3b65cff62474fbe2034d54bcd2efc02  ./index.html
+43198ca17736915982adbc8ac740cd6dd87c05e7  ./index.html
