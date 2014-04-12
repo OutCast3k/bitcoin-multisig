@@ -169,11 +169,11 @@
 					<p>Creating a multi signature address requires multiple uncompressed public keys, these can be extracted from the <a href="#" data-toggle="modal" data-target="#clientInstructionsPubkeys">bitcoin client</a> or generated using the form below. <b>Any keys used, should be stored safely as they will be needed later to redeem the bitcoins from the multi signature address</b>.</p>
 
 					<label>Address</label>
-					<input id="newBitcoinAddress" type="text" class="form-control" placeholder="1" title="Your bitcoin address" readonly>
+					<input id="newBitcoinAddress" type="text" class="form-control" placeholder="1" readonly>
 					<label>Pubkey (Share this)</label>
-					<input id="newPubKey" type="text" class="form-control" placeholder="04" title="Your public key" readonly>
+					<input id="newPubKey" type="text" class="form-control" placeholder="04" readonly>
 					<label>Privkey (Keep this private)</label>
-					<input id="newPrivKey" type="text" class="form-control" placeholder="5" title="Your private key" readonly>
+					<input id="newPrivKey" type="text" class="form-control" placeholder="5" readonly>
 					<br>
 					<input type="button" class="btn btn-primary" value="Generate" id="newKeysBtn">
 					<br><br>
@@ -182,7 +182,7 @@
 				<div class="tab-pane" id="newTransaction">
 					<h2>New Transaction <small>release the bitcoins from a multi sig address</small></h2>
 					<p>The form below is used to craft a transaction that should be given to the other users to sign.</p>
-					<label>Redeem Script</label>
+					<label><abbr title="Redeem script is required to spend coins and regenerate your multisig address">Redeem Script</abbr></label>
 					<div class="row">
 						<div class="col-xs-12">
 							<textarea class="form-control redeemScript"></textarea>
@@ -191,14 +191,14 @@
 					<br>
 					<div class="row">
 						<div class="col-xs-10">
-							<label>Multi Signature Address</label>
+							<label><abbr title="The address we are attempting to spend from">Multi Signature Address</abbr></label>
 							<div class="addressFrom">
 								3
 							</div>
 						</div>
 
 						<div class="col-xs-2">
-							<label>Balance</label>
+							<label><abbr title="The multisig addresses account balance">Balance</abbr></label>
 							<div><span id="addressBalance">0</span> <i>BTC</i> <span id="addressBalanceLoading" style="display:none;"><img src="images/loading.gif"></span></div>
 						</div>
 					</div>
@@ -217,13 +217,13 @@
 							<p>Enter the details of inputs you wish to spend.</p>
 							<div class="row">
 								<div class="col-xs-8">
-									<label>Transaction ID (Txid):</label>
+									<label><abbr title="Transaction ID">Transaction ID (Txid):</abbr></label>
 								</div>
 								<div class="col-xs-1">
-									<label>N</label>
+									<label><abbr title="Transaction Input Number">N</abbr></label>
 								</div>
 								<div class="col-xs-2">
-									<label>Amount</label>
+									<label><abbr title="This field is for accounting purposes only - the entire input will be spent!">Amount</abbr></label>
 								</div>
 								<div class="col-xs-1">
 								</div>
@@ -235,14 +235,14 @@
 										<input type="text" class="form-control txId" placeholder="">
 									</div>
 									<div class="col-xs-1">
-										<input type="text" class="form-control txIdN" placeholder="0" title="Transaction ID Input number">
+										<input type="text" class="form-control txIdN" placeholder="0">
 									</div>
 									<div class="col-xs-2">
-										<input type="text" class="form-control txIdAmount" placeholder="0.00" title="This field is for accounting purposes only. The entire input will be used.">
+										<input type="text" class="form-control txIdAmount" placeholder="0.00">
 									</div>
 									<div class="col-xs-1">
 										<a href="javascript:;" class="txidAdd"><span class="glyphicon glyphicon-plus"></span></a>
-										<a href="javascript:;" class="txidClear"><span class="glyphicon glyphicon-minus" title="Clear input"></span></a>
+										<a href="javascript:;" class="txidClear"><span class="glyphicon glyphicon-minus"></span></a>
 									</div>
 								</div>
 							</div>
@@ -252,10 +252,10 @@
 							<p>Enter the address and amount you wish to make a payment to.</p>
 							<div class="row">
 								<div class="col-xs-8">
-									<label>Address</label>
+									<label><abbr title="Address to send to">Address</abbr></label>
 								</div>
 								<div class="col-xs-3">
-									<label>Amount</label>
+									<label><abbr title="Amount to send">Amount</abbr></label>
 								</div>
 								<div class="col-xs-1">
 								</div>
@@ -280,7 +280,7 @@
 					<br>
 					<div class="row">
 						<div class="col-xs-3">
-							<label>Transacton Fee</label>
+							<label><abbr title="What is not spent will be used as a transaction fee">Transacton Fee</abbr></label>
 							<input type="text" id="transactionFee" class="form-control" value="0.0000" readonly>
 						</div>
 					</div>
@@ -1156,7 +1156,7 @@
 		return result;
 	}
 
-	$('input[title!=""], span[title!=""]').tooltip({'placement':'bottom'});
+	$('input[title!=""], abbr[title!=""]').tooltip({'placement':'bottom'});
 
 	if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
 
