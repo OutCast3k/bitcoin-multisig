@@ -704,7 +704,7 @@
 			html = '';
 			$("#verifyTxData .inputs tbody").html("");
 			$.each(deserialized.ins, function(i,o){
-				var txid = Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash));
+				var txid = (Crypto.util.bytesToHex(Crypto.util.base64ToBytes(o.outpoint.hash))).match(/.{1,2}/g).reverse().join("");
 				var rs = 0;
 
 				if(o.script.chunks[o.script.chunks.length-1]==174){
