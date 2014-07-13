@@ -956,10 +956,10 @@
 			},
 			success: function(data)	{
 				$("#addressBalance").html('0.00');
+				$("#inputs .txidRemove, #inputs .txidClear").click();
 
 				if ($(data).find("result:first").text() == 1) {
 					var bal = 0;
-					$("#inputs .txidRemove").click();
 
 					$.each($(data).find("unspent").children(), function(i, o){
 
